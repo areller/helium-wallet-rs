@@ -157,12 +157,12 @@ is 100,000,000 bones the `hnt` value can go up to 8 decimal digits of
 precision.
 
 The default behavior of the `pay` command is to print out what the
-intended payment is going to be _without_ submiting it to the
+intended payment is going to be _without_ submitting it to the
 blockchain.  In the second example the `--commit` option commits the
 actual payment to the API for processing by the blockchain.
 
 #### Multiple Payees in one transaction
-To send tokens to mulitple other accounts use:
+To send tokens to multiple other accounts use:
 
 ```
     helium-wallet pay multi <path to json file>
@@ -178,10 +178,10 @@ Example json file:
 Where `<address#>` is the wallet address for the wallet you want to
 send tokens to, `<hnt#>` is the number of HNT you want to send. Since 1 HNT
 is 100,000,000 bones the `hnt` value can go up to 8 decimal digits of
-precision. `<memo#>` is an 8 byte base 64 encdoded message.
+precision. `<memo#>` is an 8 byte base 64 encoded message.
 
 The default behavior of the `pay` command is to print out what the
-intended payment is going to be _without_ submiting it to the
+intended payment is going to be _without_ submitting it to the
 blockchain.  In the second example the `--commit` option commits the
 actual payment to the API for processing by the blockchain.
 
@@ -190,13 +190,22 @@ actual payment to the API for processing by the blockchain.
 
 The following environment variables are supported:
 
-* `HELIUM_API_URL` - The API URL to use for commands that need API
-  access, for example sending tokens.
+* `SOLANA_MAINNET_URL` - The Solana RPC URL to use for mainnet. 
+  This will get used by default or when `--url m` is passed in.
+  The default mainnet URL is a rate limited API served by the Helium 
+  Foundation. Use a custom provider for repeated or large requests.  
+
+* `SOLANA_DEVNET_URL` - The Solana RPC URL to use for devnet. 
+  This will get used when `--url d` is passed in.
 
 * `HELIUM_WALLET_PASSWORD` - The password to use to decrypt the
   wallet. Useful for scripting or other non-interactive commands, but
   use with care.
 
+* `HELIUM_WALLET_SEED_WORDS` - Space separated list of seed words to use
+  when restoring a wallet from a mnemonic word list.
+
+* `HELIUM_WALLET_SECRET` - Solana style byte array form of the keypair secret.
 
 ### Building from Source
 
@@ -232,5 +241,5 @@ cargo build --release
 ```
 
 The resulting `target/release/helium-wallet` is ready for use. Place
-it somewhere in your `$PATH` or run it straight from the the target
+it somewhere in your `$PATH` or run it straight from the target
 folder.
